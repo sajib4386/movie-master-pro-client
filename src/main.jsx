@@ -9,6 +9,7 @@ import Login from './Components/Auth/Login.jsx';
 import Register from './Components/Auth/Register.jsx';
 import AuthProvider from './Components/AuthProvider/AuthProvider.jsx';
 import { ToastContainer, toast } from 'react-toastify';
+import AllMovies from './Components/AllMovies/AllMovies.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register
+      },
+      {
+        path:"/movies",
+        Component:AllMovies
       }
     ]
   },
