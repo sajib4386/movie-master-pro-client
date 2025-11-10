@@ -3,10 +3,22 @@ import { FaBars, FaSearch, FaTimes, FaUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import logoImg from "../../assets/logo.png"
 import useAuth from "../Hooks/useAuth";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
-    const { user } = useAuth()
+    const { user,logout } = useAuth()
     const [open, setOpen] = useState(false);
+
+    const handleSignOut = () => {
+        logout()
+            .then(() => {
+                toast('Successfully Signed Out');
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast(errorMessage);
+            });
+    }
 
     // Auth/Profile Reuse
     const AuthSection = !user ?
@@ -16,7 +28,7 @@ const NavBar = () => {
         </>
         :
         <>
-            <button className="px-3 py-1 bg-red-500 rounded hover:bg-red-600 text-sm">Logout</button>
+            <button onClick={handleSignOut} className="px-3 py-1 bg-red-500 rounded hover:bg-red-600 text-sm">Logout</button>
             <div className="relative group">
                 {
                     user.photoURL ?

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaUser, FaLock } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router";
 

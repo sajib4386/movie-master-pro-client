@@ -1,21 +1,89 @@
-import React from "react";
-import { FaUser, FaLock } from "react-icons/fa";
+import React, { useState } from "react";
+import { FaUser, FaLock, FaEyeSlash, FaEye } from "react-icons/fa";
 import { GrUserManager } from "react-icons/gr";
 import { MdEmail } from "react-icons/md";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 
 const Register = () => {
-    const { googleLogin } = useAuth();
+    const { googleLogin, createUser, setUser, setError, updateUser } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false)
+
+    // Email/Password Registration
+    const handleRegister = async (e) => {
+        e.preventDefault();
+
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const password = e.target.password.value;
+        const photoURL = e.target.photoURL.value;
+
+
+        if (!name || !email || !photoURL) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Missing Information',
+                text: 'Please fill in your name, email, and photo URL before submitting.'
+            });
+            return;
+        }
+
+
+        if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || password.length < 6) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Invalid Password',
+                text: 'Password must be at least 6 characters and include uppercase and lowercase letters.'
+            });
+            return;
+        }
+
+        try {
+            const result = await createUser(email, password);
+            const user = result.user;
+            
+            await updateUser({ displayName: name, photoURL });
+            setUser({ ...user, displayName: name, photoURL });
+
+
+            const newUser = { name, email, image: photoURL };
+
+            axiosSecure.post("/users", newUser)
+                .then(data => {
+                    if (data.data.insertedId) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Successfully Registered!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                    e.target.reset();
+                    setError("");
+                    navigate("/");
+                })
+
+        } catch (err) {
+            console.error(err);
+            Swal.fire({
+                icon: "error",
+                title: "Registration Failed",
+                text: err.message
+            });
+        }
+    };
+
+
+
 
     const handleSignInWithGoogle = async () => {
         try {
             const result = await googleLogin();
             const user = result.user;
-            console.log(user)
 
             const newUser = {
                 name: user.displayName,
@@ -35,6 +103,8 @@ const Register = () => {
                             timer: 1500
                         });
                     }
+                    setUser(user);
+                    navigate("/")
                 })
 
         } catch (error) {
@@ -46,58 +116,74 @@ const Register = () => {
         }
     };
 
+    const handlePassword = (e) => {
+        e.preventDefault()
+        setShowPassword(!showPassword)
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center">
             <div className="card w-[400px] md:w-[450px] bg-[#1a1a2e] shadow-2xl text-white py-8 px-8">
                 <div className="card-body">
-                    <h2 className="text-center text-2xl font-semibold mb-6">Register</h2>
 
-                    {/* Name Field */}
-                    <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 h-12 w-full">
-                        <FaUser className="text-[#ffde7d] text-lg" />
-                        <input
-                            type="text"
-                            className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
-                            placeholder="Your Name"
-                        />
-                    </label>
+                    <form onSubmit={handleRegister}>
+                        <h2 className="text-center text-2xl font-semibold mb-6">Register</h2>
 
-                    {/* Email Field */}
-                    <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
-                        <MdEmail className="text-[#ffde7d] text-lg" />
-                        <input
-                            type="email"
-                            className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
-                            placeholder="Your Email"
-                        />
-                    </label>
+                        {/* Name Field */}
+                        <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 h-12 w-full">
+                            <FaUser className="text-[#ffde7d] text-lg" />
+                            <input
+                                type="text"
+                                name="name"
+                                className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
+                                placeholder="Your Name"
+                            />
+                        </label>
 
-                    {/* Photo URL Field */}
-                    <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
-                        <GrUserManager className="text-[#ffde7d] text-lg" />
-                        <input
-                            type="text"
-                            className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
-                            placeholder="Photo URL"
-                        />
-                    </label>
+                        {/* Email Field */}
+                        <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
+                            <MdEmail className="text-[#ffde7d] text-lg" />
+                            <input
+                                type="email"
+                                name="email"
+                                className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
+                                placeholder="Your Email"
+                            />
+                        </label>
 
-                    {/* Password Field */}
-                    <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
-                        <FaLock className="text-[#ffde7d] text-lg" />
-                        <input
-                            type="password"
-                            className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
-                            placeholder="Your Password"
-                        />
-                    </label>
+                        {/* Photo URL Field */}
+                        <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
+                            <GrUserManager className="text-[#ffde7d] text-lg" />
+                            <input
+                                type="text"
+                                name="photoURL"
+                                className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
+                                placeholder="Photo URL"
+                            />
+                        </label>
 
-                    {/* Register Button */}
-                    <div className="form-control mt-6">
-                        <button className="btn w-full bg-[#ffde7d] text-black hover:bg-[#ffe799] border-none h-11 text-base font-semibold">
-                            REGISTER
-                        </button>
-                    </div>
+                        {/* Password Field */}
+                        <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
+                            <FaLock className="text-[#ffde7d] text-lg" />
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                name="password"
+                                className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
+                                placeholder="Your Password"
+                            />
+                            <button type="button" onClick={handlePassword} className="btn btn-xs absolute right-3">
+                                {showPassword ? <FaEyeSlash /> : <FaEye />}
+                            </button>
+                        </label>
+
+                        {/* Register Button */}
+                        <div className="form-control mt-6">
+                            <button type="submit" className="btn w-full bg-[#ffde7d] text-black hover:bg-[#ffe799] border-none h-11 text-base font-semibold">
+                                REGISTER
+                            </button>
+                        </div>
+
+                    </form>
 
                     {/* Google */}
                     <button onClick={handleSignInWithGoogle} className="btn bg-white text-black border-[#e5e5e5]">
