@@ -11,7 +11,7 @@ const Footer = () => {
 
                 {/* Logo & About */}
                 <div className="text-center md:text-left">
-                    <div className="flex gap-2">
+                    <div className="flex">
                         <img src={logoImg} alt="" className="w-7 h-7 rounded-2xl mr-2" />
                     <h2 className="text-red-500 text-xl font-bold">MovieMaster Pro</h2>
                     </div>

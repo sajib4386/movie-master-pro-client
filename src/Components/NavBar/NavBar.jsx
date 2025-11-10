@@ -35,11 +35,13 @@ const NavBar = ({ user }) => {
         ;
 
     return (
-        <header className="bg-gray-900 text-white sticky top-0 z-50">
+        <header className="bg-gray-900 text-white sticky top-0 z-50 p-2 rounded-b-2xl">
             <div className="max-w-11/12 mx-auto flex items-center justify-between px-4 py-3">
                 {/* Logo & Title */}
-                <Link to="/" ><img src={logoImg} alt="" className="w-7 h-7 rounded-2xl mr-2" /></Link>
+               <div className="flex">
+                 <Link to="/" ><img src={logoImg} alt="" className="w-7 h-7 rounded-2xl mr-2" /></Link>
                 <h1 className="text-2xl font-bold text-red-500">MovieMaster Pro</h1>
+               </div>
 
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex flex-1 items-center justify-between gap-6">
