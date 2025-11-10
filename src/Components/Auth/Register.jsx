@@ -45,7 +45,7 @@ const Register = () => {
         try {
             const result = await createUser(email, password);
             const user = result.user;
-            
+
             await updateUser({ displayName: name, photoURL });
             setUser({ ...user, displayName: name, photoURL });
 
@@ -163,7 +163,7 @@ const Register = () => {
                         </label>
 
                         {/* Password Field */}
-                        <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
+                        <label className=" relative input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 mt-4 h-12 w-full">
                             <FaLock className="text-[#ffde7d] text-lg" />
                             <input
                                 type={showPassword ? 'text' : 'password'}
