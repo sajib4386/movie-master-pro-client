@@ -58,7 +58,7 @@ const NavBar = () => {
             <div className="max-w-11/12 mx-auto flex items-center justify-between px-4 py-3">
                 {/* Logo & Title */}
 
-                <Link to="/" className="flex" >
+                <Link to="/" className="flex items-center">
                     <img src={logoImg} alt="" className="w-7 h-7 rounded-2xl mr-2" />
                     <h1 className="text-2xl font-bold text-red-500">MovieMaster Pro</h1>
                 </Link>
