@@ -44,17 +44,17 @@ const AllMovies = () => {
                                 className="w-full h-full  transition-transform duration-500 hover:scale-110"
                             />
                             <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded">
-                                {movie.genre}
+                                {movie?.genre}
                             </div>
                         </div>
 
                         {/* Info */}
                         <div className="p-4 flex flex-col">
-                            <h2 className="text-lg font-semibold text-white mb-2 truncate">{movie.title}</h2>
+                            <h2 className="text-lg font-semibold text-white mb-2 truncate">{movie?.title}</h2>
 
-                            <p className="flex items-center gap-1 text-gray-400 text-sm"><FcRating />Rating: {movie.rating}</p>
-                            <p className="flex items-center gap-1 text-gray-400 text-sm"><FcClapperboard />Genre: {movie.genre}</p>
-                            <p className="flex items-center gap-1 text-gray-400 text-sm mb-3"><SlCalender /> Year: {movie.releaseYear}</p>
+                            <p className="flex items-center gap-1 text-gray-400 text-sm"><FcRating />Rating: {movie?.rating}</p>
+                            <p className="flex items-center gap-1 text-gray-400 text-sm"><FcClapperboard />Genre: {movie?.genre}</p>
+                            <p className="flex items-center gap-1 text-gray-400 text-sm mb-3"><SlCalender /> Year: {movie?.releaseYear}</p>
 
                             <Link
                                 to={`/movies/${movie._id}`}

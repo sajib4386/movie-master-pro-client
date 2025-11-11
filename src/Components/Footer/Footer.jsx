@@ -6,7 +6,7 @@ import logoImg from "../../assets/logo.png"
 
 const Footer = () => {
     return (
-        <footer className="bg-gray-900 text-gray-400 py-6 mt-10 rounded-t-3xl">
+        <footer className="bg-gray-900 text-gray-400 py-6">
             <div className="max-w-11/12 mx-auto px-4 grid grid-cols-2 md:grid-cols-4 justify-items-center gap-6">
 
                 {/* Logo & About */}

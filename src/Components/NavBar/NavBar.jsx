@@ -44,8 +44,8 @@ const NavBar = () => {
                     <li><a href="#" className="block text-center px-4 py-2 hover:bg-gray-700">My Profile</a></li>
                     {/* <li><a href="#" className="block px-4 py-2 hover:bg-gray-700">Settings</a></li> */}
                     <li className="py-3 bg-gray-700 rounded-md mt-1 text-gray-100 text-center">
-                        <div className="font-semibold text-yellow-300">{user.displayName || "No Name"}</div>
-                        <div className="text-xs text-gray-300 truncate">{user.email}</div>
+                        <div className="font-semibold text-yellow-300">{user?.displayName || "No Name"}</div>
+                        <div className="text-xs text-gray-300 truncate">{user?.email}</div>
                     </li>
 
                 </ul>
@@ -54,13 +54,15 @@ const NavBar = () => {
         ;
 
     return (
-        <header className="bg-gray-900 text-white sticky top-0 z-50 p-2 rounded-b-2xl">
+        <header className="bg-gray-900 text-white sticky top-0 z-50 p-2">
             <div className="max-w-11/12 mx-auto flex items-center justify-between px-4 py-3">
                 {/* Logo & Title */}
-                <div className="flex">
-                    <Link to="/" ><img src={logoImg} alt="" className="w-7 h-7 rounded-2xl mr-2" /></Link>
+
+                <Link to="/" className="flex" >
+                    <img src={logoImg} alt="" className="w-7 h-7 rounded-2xl mr-2" />
                     <h1 className="text-2xl font-bold text-red-500">MovieMaster Pro</h1>
-                </div>
+                </Link>
+
 
                 {/* Desktop Menu */}
                 <div className="hidden lg:flex flex-1 items-center justify-between gap-6">
