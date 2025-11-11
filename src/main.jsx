@@ -10,6 +10,7 @@ import Register from './Components/Auth/Register.jsx';
 import AuthProvider from './Components/AuthProvider/AuthProvider.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import AllMovies from './Components/AllMovies/AllMovies.jsx';
+import MovieDetails from './Components/MovieDetails/MovieDetails.jsx';
 
 const router = createBrowserRouter([
   {
@@ -30,8 +31,12 @@ const router = createBrowserRouter([
         Component: Register
       },
       {
-        path:"/movies",
-        Component:AllMovies
+        path: "/movies",
+        Component: AllMovies
+      },
+      {
+        path: "/movie-details/:id",
+        Component: MovieDetails
       }
     ]
   },
@@ -41,7 +46,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <AuthProvider>
       <RouterProvider router={router} />,
-        <ToastContainer position='top-center'/>
+      <ToastContainer position='top-center' />
     </AuthProvider>
   </StrictMode>,
 )

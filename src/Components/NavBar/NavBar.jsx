@@ -40,11 +40,11 @@ const NavBar = () => {
                         :
                         <FaUserCircle size={24} />
                 }
-                <ul className="absolute hidden group-hover:block bg-gray-800 rounded-md mt-2 w-40 right-0">
+                <ul className="absolute hidden group-hover:block bg-gray-800 rounded-md mt-2 w-48 right-0">
                     <li><a href="#" className="block text-center px-4 py-2 hover:bg-gray-700">My Profile</a></li>
-                    <li className="py-3 bg-gray-700 rounded-md mt-1 text-gray-100 text-center">
-                        <div className="font-semibold text-yellow-300">{user?.displayName || "No Name"}</div>
-                        <div className="text-xs text-gray-300 truncate">{user?.email}</div>
+                    <li className="bg-gray-700 rounded-md mt-1 text-gray-100 text-center p-5">
+                        <div className="font-semibold text-yellow-300">{user?.displayName}</div>
+                        <div className="text-xs text-gray-300">{user?.email}</div>
                     </li>
 
                 </ul>

@@ -57,7 +57,7 @@ const AllMovies = () => {
                             <p className="flex items-center gap-1 text-gray-400 text-sm mb-3"><SlCalender /> Year: {movie?.releaseYear}</p>
 
                             <Link
-                                to={`/movies/${movie._id}`}
+                                to={`/movie-details/${movie._id}`}
                                 className="mt-auto inline-block bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-2 rounded text-center transition"
                             >
                                 Details
