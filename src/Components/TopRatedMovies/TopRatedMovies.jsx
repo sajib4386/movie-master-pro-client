@@ -15,12 +15,12 @@ const TopRatedMovies = () => {
 
     return (
         <section className="bg-[#0b021f] text-white py-20">
-            <div className="max-w-6xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-extrabold mb-12 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
-                    Top Rated Movies
+            <div className="mx-auto text-center">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-start ml-24 lg:ml-10 mb-12 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
+                    <span className="border-l-8 border-purple-600 rounded-md mr-2"></span>Top Rated Movies
                 </h2>
 
-                <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 m-20 lg:m-4 gap-8">
+                <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 m-20 lg:m-4 gap-8">
                     {topMovies.map(movie => (
                         <div
                             key={movie._id}
@@ -28,7 +28,7 @@ const TopRatedMovies = () => {
                         >
                             <img
                                 src={movie?.posterUrl}
-                                alt={movie?.title}
+                                alt=""
                                 className="w-full h-64 rounded-2xl mb-4 shadow-md shadow-amber-300"
                             />
                             <h3 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
