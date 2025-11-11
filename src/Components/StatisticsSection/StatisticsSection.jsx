@@ -28,13 +28,13 @@ const StatisticsSection = () => {
                     {/* Total Movies */}
                     <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 m-4  border border-white/10 hover:bg-white/20 transition">
                         <h3 className="text-3xl font-bold text-violet-400">Total Movies</h3>
-                        <p className="text-6xl font-extrabold mt-3">{stats.totalMovies}</p>
+                        <p className="text-6xl font-extrabold mt-3">{stats?.totalMovies}</p>
                     </div>
 
                     {/* Total Users */}
                     <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 m-4 border border-white/10 hover:bg-white/20 transition">
                         <h3 className="text-3xl font-bold text-pink-400">Total Users</h3>
-                        <p className="text-6xl font-extrabold mt-3">{stats.totalUsers}</p>
+                        <p className="text-6xl font-extrabold mt-3">{stats?.totalUsers}</p>
                     </div>
                 </div>
             </div>
