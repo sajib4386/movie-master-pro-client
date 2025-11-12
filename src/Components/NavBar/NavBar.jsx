@@ -70,6 +70,7 @@ const NavBar = () => {
                             <NavLink to="/" className="hover:text-red-500 transition">Home</NavLink>
                             <NavLink to="/movies" className="hover:text-red-500 transition">All Movies</NavLink>
                             <NavLink to="/myCollection" className="hover:text-red-500 transition">My Collection</NavLink>
+                            <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
                         </nav>
 
                         {/* Search Bar */}
@@ -101,7 +102,7 @@ const NavBar = () => {
                     <NavLink to="/" className="block hover:text-red-500 transition">Home</NavLink>
                     <NavLink to="/movies" className="block hover:text-red-500 transition">All Movies</NavLink>
                     <NavLink to="/myCollection" className="block hover:text-red-500 transition">My Collection</NavLink>
-
+                    <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
                     {/* Mobile Search Bar */}
                     <div className="relative">
                         <input

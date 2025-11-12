@@ -1,9 +1,12 @@
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcRating, FcClapperboard } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineEdit, MdDelete } from "react-icons/md";
 import Loading from "../Loading/Loading";
 import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const MovieDetails = () => {
     const { id } = useParams();
@@ -11,6 +14,7 @@ const MovieDetails = () => {
     const { user: currentUser } = useAuth();
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axiosSecure
@@ -21,6 +25,34 @@ const MovieDetails = () => {
             })
             .catch(err => console.error(err));
     }, [axiosSecure, id]);
+
+    const handleDelete = (_id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "This movie will be permanently deleted!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`/movies/${_id}`)
+                    .then((data) => {
+                        if (data.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Movie has been removed.",
+                                icon: "success"
+                            });
+                            navigate("/myCollection");
+                        }
+                    })
+                    .catch((err) => console.error(err));
+            }
+        });
+    };
+
 
     if (loading) return <Loading />;
 
@@ -74,12 +106,11 @@ const MovieDetails = () => {
                     {/* Edit/Delete buttons visible only to owner */}
                     {isOwner &&
                         <div className="flex gap-4 mt-4">
-                            
                             <Link to={`/update-movie/${movie._id}`} className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600">
                                 <MdOutlineEdit /> Edit
                             </Link>
-                           
-                            <button className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600">
+                            <button onClick={() => handleDelete(movie._id)}
+                                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-600">
                                 <MdDelete /> Delete
                             </button>
                         </div>

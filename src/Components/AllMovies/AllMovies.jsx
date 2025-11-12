@@ -33,7 +33,7 @@ const AllMovies = () => {
                         key={movie._id}
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: index * 0.5, duration: 2 }}
+                        transition={{ delay: index * 0.3, duration: 1 }}
                         className="bg-[#1a1c23] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform hover:shadow-red-400"
                     >
                         {/* Poster */}

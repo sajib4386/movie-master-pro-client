@@ -22,4 +22,4 @@ const GenreSection = () => (
     </section>
 );
 
-export default GenreSection;
+export default GenreSection; 
