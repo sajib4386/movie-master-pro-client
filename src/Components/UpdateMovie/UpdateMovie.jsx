@@ -9,6 +9,7 @@ const UpdateMovie = () => {
     const axiosSecure = useAxiosSecure();
     const [movie, setMovie] = useState(null);
     const navigate = useNavigate();
+    const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
         axiosSecure
@@ -21,6 +22,7 @@ const UpdateMovie = () => {
 
     const handleUpdate = (e) => {
         e.preventDefault();
+        setSubmitting(true);
         const form = e.target;
 
         const updatedMovie = {
@@ -53,10 +55,11 @@ const UpdateMovie = () => {
                     text: "Something went wrong while updating.",
                     icon: "error",
                 });
-            });
+            })
+            .finally(() => setSubmitting(false));
     };
 
-    if (!movie) return <Loading></Loading>;
+    if (!movie || submitting) return <Loading />;
 
     return (
         <div className="min-h-screen flex items-center justify-center text-white px-4 py-10">
@@ -167,9 +170,10 @@ const UpdateMovie = () => {
 
                     <button
                         type="submit"
+                        disabled={submitting}
                         className="btn w-full bg-[#ffde7d] text-black hover:bg-[#ffe799] border-none h-11 text-base font-semibold"
                     >
-                        Update Movie
+                         {submitting ? "Updating..." : "Update Movie"}
                     </button>
                 </form>
             </div>

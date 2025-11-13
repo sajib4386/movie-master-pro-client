@@ -69,8 +69,14 @@ const NavBar = () => {
                         <nav className="flex items-center gap-6">
                             <NavLink to="/" className="hover:text-red-500 transition">Home</NavLink>
                             <NavLink to="/movies" className="hover:text-red-500 transition">All Movies</NavLink>
-                            <NavLink to="/myCollection" className="hover:text-red-500 transition">My Collection</NavLink>
-                            <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
+
+                            {user &&
+                                <>
+                                    <NavLink to="/myCollection" className="hover:text-red-500 transition">My Collection</NavLink>
+                                    <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
+                                    <NavLink to="/watchlist" className="hover:text-yellow-400 transition">Watchlist</NavLink>
+                                </>
+                            }
                         </nav>
 
                         {/* Search Bar */}
@@ -101,8 +107,14 @@ const NavBar = () => {
                 <div className="lg:hidden bg-gray-800 px-6 py-4 space-y-4">
                     <NavLink to="/" className="block hover:text-red-500 transition">Home</NavLink>
                     <NavLink to="/movies" className="block hover:text-red-500 transition">All Movies</NavLink>
-                    <NavLink to="/myCollection" className="block hover:text-red-500 transition">My Collection</NavLink>
-                    <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
+
+                    {user &&
+                        <>
+                            <NavLink to="/myCollection" className="hover:text-red-500 transition">My Collection</NavLink>
+                            <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
+                            <NavLink to="/watchlist" className="hover:text-yellow-400 transition">Watchlist</NavLink>
+                        </>
+                    }
                     {/* Mobile Search Bar */}
                     <div className="relative">
                         <input

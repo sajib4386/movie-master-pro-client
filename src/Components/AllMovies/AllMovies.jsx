@@ -12,6 +12,7 @@ const AllMovies = () => {
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
+
         axiosSecure.get('/movies')
             .then(data => {
                 setMovies(data.data);
@@ -19,6 +20,28 @@ const AllMovies = () => {
             })
             .catch(err => console.error(err));
     }, [axiosSecure]);
+
+    const handleAddToWatchlist = (movieId) => {
+        axiosSecure.post('/watchlist', { movieId })
+            .then(data => {
+                if (data.data.insertedId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added!',
+                        text: 'Movie added to your watchlist.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    });
+                }
+            })
+            .catch(err => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: err.response?.data?.message || 'Failed to add movie',
+                });
+            });
+    }
 
 
     if (loading) return <Loading></Loading>;

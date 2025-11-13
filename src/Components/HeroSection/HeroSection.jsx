@@ -18,7 +18,9 @@ const HeroSection = () => {
 
     useEffect(() => {
         axiosSecure.get("/movies")
-            .then((data) => setMovies(data.data))
+            .then((data) => {
+                console.log("Movies response:", data.data);
+                setMovies(data.data)})
             .catch((err) => console.error(err));
     }, [axiosSecure]);
 

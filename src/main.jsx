@@ -14,6 +14,11 @@ import MovieDetails from './Components/MovieDetails/MovieDetails.jsx';
 import MyCollection from './Components/MyCollection/MyCollection.jsx';
 import UpdateMovie from './Components/UpdateMovie/UpdateMovie.jsx';
 import CreateAMovie from './Components/CreateAMovie/CreateAMovie.jsx';
+import NotFound from './Components/NotFound/NotFound.jsx';
+import Watchlist from './Components/Watchlist/Watchlist.jsx';
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary.jsx';
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -43,15 +48,23 @@ const router = createBrowserRouter([
       },
       {
         path: "/myCollection",
-        Component: MyCollection
+        element:<PrivateRoute><MyCollection></MyCollection></PrivateRoute>
       },
       {
         path: "/update-movie/:id",
-        Component: UpdateMovie
+        element:<PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>
       },
       {
         path: "/add-movie",
-        Component: CreateAMovie
+        element:<PrivateRoute><CreateAMovie></CreateAMovie></PrivateRoute>
+      },
+      {
+        path: "*",
+        Component: NotFound
+      },
+      {
+        path: "/watchlist",
+        Component: Watchlist
       }
     ]
   },
@@ -59,9 +72,11 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-      <ToastContainer position='top-center' />
-    </AuthProvider>
+    <ErrorBoundary>
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <ToastContainer position='top-center' />
+      </AuthProvider>
+    </ErrorBoundary>
   </StrictMode>
 )

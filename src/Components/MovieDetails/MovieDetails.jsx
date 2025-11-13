@@ -53,6 +53,32 @@ const MovieDetails = () => {
         });
     };
 
+    // Watchlist
+    const handleAddToWatchlist = (movieId) => {
+        axiosSecure.post('/watchlist', { movieId })
+            .then(res => {
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to Watchlist!',
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+                }
+            })
+            .catch(err => {
+                if (err.response?.status === 409) {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Already in Watchlist',
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+                } else {
+                    console.error(err);
+                }
+            });
+    };
 
     if (loading) return <Loading />;
 
@@ -115,6 +141,13 @@ const MovieDetails = () => {
                             </button>
                         </div>
                     }
+                    
+                    <button
+                        onClick={() => handleAddToWatchlist(movie._id)}
+                        className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold mt-4"
+                    >
+                        + Add to Watchlist
+                    </button>
                 </div>
             </div>
         </section>

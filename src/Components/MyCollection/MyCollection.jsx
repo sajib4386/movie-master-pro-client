@@ -4,17 +4,20 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
+import Loading from "../Loading/Loading";
 
 
 const MyCollection = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure();
     const [myMovies, setMyMovies] = useState([]);
+    const [loading,setLoading] = useState(true)
 
     useEffect(() => {
         axiosSecure.get(`/movies?addedBy=${user?.email}`)
-            .then(data => {
-                setMyMovies(data.data)
+            .then(res => {
+                setMyMovies(res.data)
+                setLoading(false)
             })
             .catch((err) => console.error(err));
     }, [user, axiosSecure]);
@@ -45,6 +48,8 @@ const MyCollection = () => {
             }
         });
     };
+
+    if (loading) return <Loading></Loading>;
 
 
     return (
