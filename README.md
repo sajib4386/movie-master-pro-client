@@ -1,16 +1,29 @@
-# React + Vite
+# 🎬 Movie Master Pro
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live Site](https://movie-master-pro-2891c.web.app/)
 
-Currently, two official plugins are available:
+Movie Master Pro is a modern movie website where users can explore movies, manage their collections, and keep track of their watchlist. This project is built using **React**, **React Router**, **TailwindCSS**, **DaisyUI**, **React Icons**, **SweetAlert2**, and **Framer Motion**.  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Browse All Movies:** Users can view all movies in a clean and responsive card layout.  
+- **My Collection:** Logged-in users can manage their personal movie collections.  
+- **Watchlist:** Users can add their favorite movies to a watchlist and watch them later.  
+- **Add / Update Movies:** Users can add new movies and update existing ones (private routes for authenticated users).  
+- **Responsive Design:** Fully responsive design with using TailwindCSS and DaisyUI.  
+- **Beautiful Animations & Alerts:** Smooth animations with Framer Motion and stylish pop-up alerts using SweetAlert2.  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+
+- **Frontend:** React.js, React Router  
+- **Styling:** TailwindCSS, DaisyUI  
+- **Icons & Animations:** React Icons, Framer Motion  
+- **Alerts:** SweetAlert2  
+- **Hosting:** Firebase Hosting / Vercel  
+
+---
+
