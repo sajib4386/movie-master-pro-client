@@ -3,20 +3,27 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcRating } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import { MdMovie, MdOutlineSlowMotionVideo } from "react-icons/md";
+import Loading from "../Loading/Loading";
 
 const LatestMovies = () => {
     const axiosSecure = useAxiosSecure();
     const [recentMovies, setRecentMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axiosSecure
             .get("/latest-movies")
-            .then((data) => setRecentMovies(data.data))
+            .then((data) => {
+                setRecentMovies(data.data)
+                setLoading(false);
+            })
             .catch((err) => console.error(err));
     }, [axiosSecure]);
 
+    if (loading) return <Loading />;
+
     return (
-        <section className="bg-[#0b021f] text-white py-20">
+        <section className="dark:bg-[#0b021f] text-white py-20">
             <div className="mx-auto text-center px-4">
 
                 <h2 className="text-start text-3xl md:text-5xl font-extrabold ml-24 md:ml-5 lg:ml-10 mb-12 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
@@ -27,7 +34,7 @@ const LatestMovies = () => {
                     {recentMovies.map((movie) => (
                         <div
                             key={movie._id}
-                            className="relative rounded-xl overflow-hidden bg-[#1c1233] group shadow-lg"
+                            className="relative rounded-xl overflow-hidden bg-[#1c1233] group shadow-lg border-2 border-amber-300"
                         >
                             {/* Image */}
                             <img

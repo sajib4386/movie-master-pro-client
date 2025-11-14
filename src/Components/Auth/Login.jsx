@@ -106,10 +106,10 @@ const Login = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center">
-            <div className="card w-[400px] md:w-[450px]  bg-[#1a1a2e] shadow-2xl text-white py-8 px-8">
+            <div className="card w-[400px] md:w-[450px]  dark:bg-[#1a1a2e] shadow-2xl text-white py-8 px-8">
                 <div className="card-body">
                     <form onSubmit={handleLogin}>
-                        <h2 className="text-center text-2xl font-semibold mb-6">Login</h2>
+                        <h2 className="text-center text-2xl dark:text-white text-black font-semibold mb-6">Login</h2>
 
                         {/* Email Field */}
                         <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 h-12 w-full">
@@ -137,7 +137,7 @@ const Login = () => {
                         </label>
 
                         {/* Forgot Password */}
-                        <a href="#" className="text-[#ffde7d] hover:underline block text-sm mt-2">Forgot Password?</a>
+                        <a href="#" className="dark:text-[#ffde7d] text-gray-700 hover:underline block text-sm mt-2">Forgot Password?</a>
 
                         {/* Login Button */}
                         <div className="form-control mt-6">
@@ -154,9 +154,9 @@ const Login = () => {
                     </button>
 
                     {/* Register Link */}
-                    <p className="text-center text-sm mt-6">
+                    <p className="text-center text-sm mt-6 dark:text-white text-black">
                         Don’t have an account?{" "}
-                        <Link to="/register" className="text-[#ffde7d] hover:underline">Register</Link>
+                        <Link to="/register" className="dark:text-[#ffde7d] text-red-700 text-xl hover:underline">Register</Link>
                     </p>
                 </div>
             </div>

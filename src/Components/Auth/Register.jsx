@@ -133,11 +133,11 @@ const Register = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center">
-            <div className="card w-[400px] md:w-[450px] bg-[#1a1a2e] shadow-2xl text-white py-8 px-8">
+            <div className="card w-[400px] md:w-[450px] dark:bg-[#1a1a2e] shadow-2xl text-white py-8 px-8">
                 <div className="card-body">
 
                     <form onSubmit={handleRegister}>
-                        <h2 className="text-center text-2xl font-semibold mb-6">Register</h2>
+                        <h2 className="text-center text-2xl text-black dark:text-white font-semibold mb-6">Register</h2>
 
                         {/* Name Field */}
                         <label className="input input-bordered flex items-center gap-3 bg-[#24243e] border-none text-gray-300 h-12 w-full">
@@ -202,9 +202,9 @@ const Register = () => {
                     </button>
 
                     {/* Login Link */}
-                    <p className="text-center text-sm mt-6">
+                    <p className="text-center text-sm mt-6 dark:text-white text-black">
                         Already have an account?{" "}
-                        <Link to="/login" className="text-[#ffde7d] hover:underline">
+                        <Link to="/login" className="dark:text-[#ffde7d] text-xl text-red-500 hover:underline">
                             Login
                         </Link>
                     </p>

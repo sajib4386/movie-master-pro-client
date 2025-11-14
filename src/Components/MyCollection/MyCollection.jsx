@@ -53,8 +53,8 @@ const MyCollection = () => {
 
 
     return (
-        <div className="min-h-screen py-10 px-5 text-gray-100">
-            <h2 className="text-3xl font-bold mb-8 text-center text-white">
+        <div className="dark:bg-[#030303] min-h-screen py-10 px-5 text-gray-100">
+            <h2 className="text-3xl font-bold mb-8 text-center text-black dark:text-white">
                 My Movie Collection: <span className="text-yellow-400">{myMovies.length}</span>
             </h2>
 
@@ -62,7 +62,7 @@ const MyCollection = () => {
                 {myMovies.map((movie) => (
                     <div
                         key={movie._id}
-                        className="grid grid-cols-[120px_1fr] gap-6 bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow"
+                        className="grid grid-cols-[120px_1fr] gap-6 bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow border-2 border-amber-300 dark:border-amber-100"
                     >
                         {/* Left: Poster */}
                         <img

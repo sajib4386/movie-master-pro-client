@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import logoImg from "../../assets/logo.png"
+import Loading from "../Loading/Loading";
 
 const StatisticsSection = () => {
     const axiosSecure = useAxiosSecure();
     const [stats, setStats] = useState([]);
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axiosSecure.get("/stats")
             .then(data => {
                 setStats(data.data);
+                setLoading(false);
             })
             .catch(err => console.error(err));
     }, [axiosSecure]);
 
+     if (loading) return <Loading />;
+
     return (
-        <section className="bg-[#0b021f] text-white py-20">
+        <section className="dark:bg-[#0b021f] text-white py-20">
             <div className="max-w-5xl mx-auto text-center">
                 <div className="flex items-center justify-center gap-2 mb-10">
                     <img src={logoImg} alt="Logo" className="w-8 md:w-10 h-8 md:h-10 rounded-2xl" />
@@ -26,13 +31,13 @@ const StatisticsSection = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                     {/* Total Movies */}
-                    <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 m-4  border border-white/10 hover:bg-white/20 transition">
+                    <div className="bg-gray-600 dark:bg-white/10 border-2 border-amber-500 dark:backdrop-blur-lg rounded-3xl p-8 m-4 dark:border-white/10 dark:hover:bg-white/20 transition">
                         <h3 className="text-3xl font-bold text-violet-400">Total Movies</h3>
                         <p className="text-6xl font-extrabold mt-3">{stats?.totalMovies}</p>
                     </div>
 
                     {/* Total Users */}
-                    <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 m-4 border border-white/10 hover:bg-white/20 transition">
+                    <div className="bg-gray-600 dark:bg-white/10 border-2 border-amber-500 dark:backdrop-blur-lg rounded-3xl p-8 m-4 dark:border-white/10 dark:hover:bg-white/20 transition">
                         <h3 className="text-3xl font-bold text-pink-400">Total Users</h3>
                         <p className="text-6xl font-extrabold mt-3">{stats?.totalUsers}</p>
                     </div>

@@ -5,7 +5,7 @@ import { FaArrowAltCircleLeft } from "react-icons/fa";
 
 const NotFound = () => {
     return (
-        <div className="min-h-screen bg-[#0f0f1a] flex flex-col items-center justify-center text-center px-6">
+        <div className="min-h-screen dark:bg-[#0f0f1a] flex flex-col items-center justify-center text-center px-6">
             <motion.h1
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -15,7 +15,7 @@ const NotFound = () => {
                 404
             </motion.h1>
 
-            <p className="text-gray-300 text-lg md:text-xl mt-4">
+            <p className="text-black dark:text-gray-300 text-lg md:text-xl mt-4">
                 Oops! The page you’re looking for doesn’t exist.
             </p>
 

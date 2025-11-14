@@ -1,11 +1,6 @@
 @import "tailwindcss";
-@plugin "daisyui";
-
-body {
-  background: linear-gradient(to bottom, #000011 0%, #000033 50%, #01013d 85%);
-  color: #ffffff;
-  min-height: 100vh;
-  background-attachment: fixed;
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
 }
 
-
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

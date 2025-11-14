@@ -9,6 +9,7 @@ const UpdateMovie = () => {
     const axiosSecure = useAxiosSecure();
     const [movie, setMovie] = useState(null);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
@@ -16,6 +17,7 @@ const UpdateMovie = () => {
             .get(`/movies/${id}`)
             .then(data => {
                 setMovie(data.data)
+                setLoading(false);
             })
             .catch((err) => console.error(err));
     }, [id, axiosSecure]);
@@ -59,11 +61,11 @@ const UpdateMovie = () => {
             .finally(() => setSubmitting(false));
     };
 
-    if (!movie || submitting) return <Loading />;
+    if (loading || submitting) return <Loading />; 
 
     return (
         <div className="min-h-screen flex items-center justify-center text-white px-4 py-10">
-            <div className="w-full max-w-2xl bg-[#1a1a2e] rounded-2xl p-8 space-y-6">
+            <div className="w-full max-w-2xl dark:bg-[#1a1a2e] rounded-2xl p-8 space-y-6 shadow-md shadow-gray-300 dark:shadow-none border-2 border-amber-300">
                 <h2 className="text-center text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                     Update Movie
                 </h2>
@@ -173,7 +175,7 @@ const UpdateMovie = () => {
                         disabled={submitting}
                         className="btn w-full bg-[#ffde7d] text-black hover:bg-[#ffe799] border-none h-11 text-base font-semibold"
                     >
-                         {submitting ? "Updating..." : "Update Movie"}
+                        {submitting ? "Updating..." : "Update Movie"}
                     </button>
                 </form>
             </div>

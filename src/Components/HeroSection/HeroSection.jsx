@@ -9,20 +9,25 @@ import { FcClapperboard, FcRating } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import { FaRegSquarePlus } from "react-icons/fa6";
+import Loading from "../Loading/Loading";
 
 const HeroSection = () => {
     const axiosSecure = useAxiosSecure();
     const [movies, setMovies] = useState([]);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axiosSecure.get("/movies")
             .then((data) => {
-                console.log("Movies response:", data.data);
-                setMovies(data.data)})
+                setMovies(data.data)
+                setLoading(false);
+            })
             .catch((err) => console.error(err));
     }, [axiosSecure]);
+
+    if (loading) return <Loading />;
 
     return (
         <section className="relative h-screen w-full text-white overflow-hidden">

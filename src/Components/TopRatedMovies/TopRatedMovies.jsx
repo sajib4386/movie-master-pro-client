@@ -2,29 +2,35 @@ import React, { useEffect, useState } from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcRating, FcClapperboard } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
+import Loading from "../Loading/Loading";
 
 const TopRatedMovies = () => {
     const axiosSecure = useAxiosSecure();
     const [topMovies, setTopMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         axiosSecure.get("/top-rated")
-            .then(data => setTopMovies(data.data))
+            .then(data => {
+                setTopMovies(data.data)
+                setLoading(false);
+            })
             .catch(err => console.error(err));
     }, [axiosSecure]);
+    if (loading) return <Loading />;
 
     return (
-        <section className="bg-[#0b021f] text-white py-20">
+        <section className="dark:bg-[#0b021f] text-white py-20">
             <div className="mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-start ml-24 lg:ml-10 mb-12 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                     <span className="border-l-8 border-purple-600 rounded-md mr-2"></span>Top Rated Movies
                 </h2>
 
-                <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 m-20 lg:m-4 gap-8">
+                <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 m-20 lg:m-4 gap-8 ">
                     {topMovies.map(movie => (
                         <div
                             key={movie._id}
-                            className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 border border-white/10 hover:bg-white/20 transition"
+                            className="bg-[#0b021f] backdrop-blur-lg rounded-3xl p-6 border dark:border-white/10 border-amber-400 shadow-md shadow-amber-300 dark:hover:bg-white/20 transition"
                         >
                             <img
                                 src={movie?.posterUrl}

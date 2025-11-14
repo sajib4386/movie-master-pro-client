@@ -2,18 +2,18 @@ import React from "react";
 import { MdOutlineMovie, MdOutlineSmartToy, MdOutlineSpeed } from "react-icons/md";
 
 const AboutPlatform = () => (
-    <section className="bg-[#0b021f] text-white py-20 px-4">
+    <section className="dark:bg-[#0b021f] text-white py-20 px-4">
         <div className="max-w-6xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-extrabold mb-8 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                 About MovieMaster Pro
             </h2>
-            <p className="text-gray-300 text-lg md:text-xl mb-12 max-w-3xl mx-auto">
+            <p className="text-gray-600 dark:text-gray-300 text-lg md:text-xl mb-12 max-w-3xl mx-auto">
                 MovieMaster Pro is your ultimate movie platform, bringing together a huge library of films, personalized recommendations, and fast streaming for the ultimate viewing experience.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {/* Card 1 */}
-                <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all duration-300">
+                <div className="bg-gray-600 dark:bg-white/10 border-2 border-amber-500 dark:backdrop-blur-lg rounded-3xl p-6 flex flex-col items-center text-center dark:hover:bg-white/20 transition-all duration-300">
                     <div className="text-indigo-400 mb-4">
                         <MdOutlineMovie size={30} />
                     </div>
@@ -22,7 +22,7 @@ const AboutPlatform = () => (
                 </div>
 
                 {/* Card 2 */}
-                <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all duration-300">
+                <div className="bg-gray-600 dark:bg-white/10 border-2 border-amber-500 dark:backdrop-blur-lg rounded-3xl p-6 flex flex-col items-center text-center dark:hover:bg-white/20 transition-all duration-300">
                     <div className="text-indigo-400 mb-4">
                         <MdOutlineSmartToy size={30} />
                     </div>
@@ -31,7 +31,7 @@ const AboutPlatform = () => (
                 </div>
 
                 {/* Card 3 */}
-                <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-6 flex flex-col items-center text-center hover:bg-white/20 transition-all duration-300">
+                <div className="bg-gray-600 dark:bg-white/10 border-2 border-amber-500 dark:backdrop-blur-lg rounded-3xl p-6 flex flex-col items-center text-center dark:hover:bg-white/20 transition-all duration-300">
                     <div className="text-indigo-400 mb-4">
                         <MdOutlineSpeed size={30} />
                     </div>

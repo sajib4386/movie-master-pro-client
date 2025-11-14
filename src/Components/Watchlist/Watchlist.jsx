@@ -72,13 +72,13 @@ const Watchlist = () => {
 
     return (
         <div className="min-h-screen py-10 px-5 text-gray-100">
-            <h2 className="text-3xl font-bold mb-8 text-center text-white">
+            <h2 className="text-3xl font-bold mb-8 text-center text-black dark:text-white">
                 My Watchlist: <span className="text-yellow-400">{movies.length}</span>
             </h2>
-
+            
             {movies.length === 0 ? (
                 <div className="flex flex-col items-center justify-center mt-20">
-                    <div className="bg-gray-800 text-gray-200 p-8 rounded-xl shadow-lg max-w-md text-center">
+                    <div className="dark:bg-gray-800 text-gray-200 p-8 rounded-xl shadow-lg max-w-md text-center">
                         <h3 className="text-2xl font-bold mb-2 text-yellow-400">Empty Watchlist</h3>
                         <p className="text-gray-400">You haven't added any movies yet. Start exploring and add some!</p>
                     </div>
@@ -86,8 +86,8 @@ const Watchlist = () => {
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
                     {movies.map((movie) => (
-                        <div key={movie._id} className="bg-gray-800 rounded-lg shadow-md overflow-hidden">
-                            <img src={movie.posterUrl} alt="" className="w-full h-72 object-cover" />
+                        <div key={movie._id} className="bg-gray-800 rounded-lg overflow-hidden border-2 border-amber-300 shadow-md shadow-amber-200">
+                            <img src={movie.posterUrl} alt="" className="w-full h-72" />
                             <div className="p-4 flex flex-col justify-between">
                                 <div>
                                     <h3 className="text-xl font-bold mb-2">{movie.title}</h3>

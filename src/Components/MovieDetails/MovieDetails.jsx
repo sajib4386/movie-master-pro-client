@@ -55,9 +55,19 @@ const MovieDetails = () => {
 
     // Watchlist
     const handleAddToWatchlist = (movieId) => {
-        axiosSecure.post('/watchlist', { movieId })
-            .then(res => {
-                if (res.data.insertedId) {
+        axiosSecure.post('/watchlist', { movieId, email: currentUser?.email })
+            .then(data => {
+
+                if (data.data.exists) {
+                    return Swal.fire({
+                        icon: 'info',
+                        title: 'Already in Watchlist',
+                        timer: 1200,
+                        showConfirmButton: false
+                    });
+                }
+
+                if (data.data.inserted) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Added to Watchlist!',
@@ -65,27 +75,24 @@ const MovieDetails = () => {
                         showConfirmButton: false
                     });
                 }
+
             })
-            .catch(err => {
-                if (err.response?.status === 409) {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Already in Watchlist',
-                        timer: 1200,
-                        showConfirmButton: false
-                    });
-                } else {
-                    console.error(err);
-                }
+            .catch(() => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Something went wrong!',
+                    text: 'Please try again later.',
+                });
             });
     };
+
 
     if (loading) return <Loading />;
 
     const isOwner = currentUser?.email === movie?.addedBy;
 
     return (
-        <section className="bg-[#030303] text-white py-12 px-4 min-h-screen">
+        <section className="dark:bg-[#030303] text-white py-12 px-4 min-h-screen">
             <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8">
                 {/* Poster */}
                 <img
@@ -101,7 +108,7 @@ const MovieDetails = () => {
 
 
                     {/*  Info Box */}
-                    <div className="bg-[#1c1233] p-6 rounded-2xl flex flex-col gap-4 border-2 border-blue-900">
+                    <div className="bg-[#1c1233] p-6 rounded-2xl flex flex-col gap-4 border-2 dark:border-blue-900 border-amber-300">
                         <div className="text-xl font-semibold text-gray-200">
                             Title: <span className="text-white">{movie?.title}</span>
                         </div>
@@ -121,10 +128,11 @@ const MovieDetails = () => {
                             <span>Country: {movie?.country}</span>
                             <span>Cast: {movie?.cast}</span>
                         </div>
+                            <span className="text-xl">Added By: {movie?.addedBy}</span>
                     </div>
 
                     {/* Plot Summary Box */}
-                    <div className="bg-[#1c1233] p-6 rounded-2xl mt-4 border-2 border-blue-900">
+                    <div className="bg-[#1c1233] p-6 rounded-2xl mt-4 border-2 dark:border-blue-900 border-amber-300">
                         <h3 className="text-2xl font-semibold mb-2">Plot Summary</h3>
                         <p className="text-gray-200 leading-relaxed">{movie?.plotSummary}</p>
                     </div>
@@ -141,7 +149,7 @@ const MovieDetails = () => {
                             </button>
                         </div>
                     }
-                    
+
                     <button
                         onClick={() => handleAddToWatchlist(movie._id)}
                         className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-semibold mt-4"

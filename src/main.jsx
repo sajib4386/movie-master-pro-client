@@ -48,15 +48,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/myCollection",
-        element:<PrivateRoute><MyCollection></MyCollection></PrivateRoute>
+        element: <PrivateRoute><MyCollection></MyCollection></PrivateRoute>
       },
       {
         path: "/update-movie/:id",
-        element:<PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>
+        element: <PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>
       },
       {
         path: "/add-movie",
-        element:<PrivateRoute><CreateAMovie></CreateAMovie></PrivateRoute>
+        element: <PrivateRoute><CreateAMovie></CreateAMovie></PrivateRoute>
       },
       {
         path: "*",

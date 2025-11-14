@@ -61,7 +61,7 @@ const CreateAMovie = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center  text-white m-5">
-            <div className="card w-[400px] md:w-[600px] bg-[#1a1a2e] py-8 px-8 rounded-2xl">
+            <div className="card w-[400px] md:w-[600px] dark:bg-[#1a1a2e] py-8 px-8 rounded-2xl shadow-md shadow-gray-300 dark:shadow-none border-2 border-amber-300 dark:border-amber-100">
                 <h2 className="text-center text-3xl font-semibold mb-6 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                     Add New Movie
                 </h2>

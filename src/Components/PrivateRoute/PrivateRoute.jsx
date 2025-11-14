@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import useAuth from "../Hooks/useAuth";
-import { useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router";
 import Loading from "../Loading/Loading";
 
 

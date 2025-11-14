@@ -3,7 +3,7 @@ import React from "react";
 const genres = ["Action", "Drama", "Comedy", "Horror", "Romance", "Sci-Fi", "Thriller", "Animation", "Fantasy", "Mystery"];
 
 const GenreSection = () => (
-    <section className="bg-[#0b021f] text-white py-10 px-4">
+    <section className="dark:bg-[#0b021f] text-white py-10 px-4">
         <div className="mx-auto flex flex-wrap items-center gap-4 justify-center">
             <h2 className="text-4xl md:text-3xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                 Genres:

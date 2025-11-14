@@ -21,34 +21,11 @@ const AllMovies = () => {
             .catch(err => console.error(err));
     }, [axiosSecure]);
 
-    const handleAddToWatchlist = (movieId) => {
-        axiosSecure.post('/watchlist', { movieId })
-            .then(data => {
-                if (data.data.insertedId) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Added!',
-                        text: 'Movie added to your watchlist.',
-                        timer: 1500,
-                        showConfirmButton: false
-                    });
-                }
-            })
-            .catch(err => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: err.response?.data?.message || 'Failed to add movie',
-                });
-            });
-    }
-
-
     if (loading) return <Loading></Loading>;
 
     return (
-        <div className="min-h-screen py-10 px-6">
-            <h1 className="text-3xl font-bold text-white text-center mb-8">All Movies</h1>
+        <div className="min-h-screen py-10 px-6 dark:bg-[#0b021f]">
+            <h1 className="text-3xl font-bold text-center text-purple-600 mb-8">All Movies</h1>
 
             <div className="max-w-11/12 mx-auto grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
                 {movies.map((movie, index) => (
@@ -57,7 +34,7 @@ const AllMovies = () => {
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.3, duration: 1 }}
-                        className="bg-[#1a1c23] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform hover:shadow-red-400"
+                        className="bg-[#1a1c23] rounded-lg overflow-hidden shadow-md hover:scale-105 transition-transform hover:shadow-red-400 border-2 border-amber-500"
                     >
                         {/* Poster */}
                         <div className="relative w-auto h-96 md:w-full md:h-80 overflow-hidden">
