@@ -13,6 +13,7 @@ const Watchlist = () => {
     const [error, setError] = useState("");
     const axiosSecure = useAxiosSecure();
 
+
     useEffect(() => {
         if (!user) return;
 
@@ -21,7 +22,10 @@ const Watchlist = () => {
                 setLoading(true);
                 setError("");
 
-                const res = await axiosSecure.get("/watchlist");
+                const res = await axiosSecure.get("/watchlist", {
+                    params: { email: user.email }
+                });
+
                 const moviesArray = Array.isArray(res.data) ? res.data : [];
                 setMovies(moviesArray);
 
@@ -49,13 +53,17 @@ const Watchlist = () => {
 
         if (result.isConfirmed) {
             try {
-                await axiosSecure.delete(`/watchlist/${id}`);
+                await axiosSecure.delete(`/watchlist/${id}`, {
+                    params: { email: user.email } 
+                });
+
                 Swal.fire({
                     title: "Deleted!",
                     text: "Movie has been removed.",
                     icon: "success"
                 });
-                setMovies(prev => prev.filter(m => m._id !== id));
+
+                setMovies(prev => prev.filter(m => m._id.toString() !== id));
             } catch (err) {
                 console.error(err);
                 Swal.fire({
@@ -75,7 +83,7 @@ const Watchlist = () => {
             <h2 className="text-3xl font-bold mb-8 text-center text-black dark:text-white">
                 My Watchlist: <span className="text-yellow-400">{movies.length}</span>
             </h2>
-            
+
             {movies.length === 0 ? (
                 <div className="flex flex-col items-center justify-center mt-20">
                     <div className="dark:bg-gray-800 text-gray-200 p-8 rounded-xl shadow-lg max-w-md text-center">
@@ -103,7 +111,10 @@ const Watchlist = () => {
                                     >
                                         Details
                                     </Link>
-                                    <button onClick={() => handleRemove(movie._id)} className="flex items-center gap-1 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm">
+                                    <button
+                                        onClick={() => handleRemove(movie._id)}
+                                        className="flex items-center gap-1 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 text-sm"
+                                    >
                                         <MdDelete /> Delete
                                     </button>
                                 </div>
@@ -117,3 +128,4 @@ const Watchlist = () => {
 };
 
 export default Watchlist;
+
