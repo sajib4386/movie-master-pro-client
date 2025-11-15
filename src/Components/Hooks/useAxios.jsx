@@ -4,9 +4,9 @@ const axiosInstance = axios.create({
     baseURL: 'https://movie-master-pro-server-seven.vercel.app/',
 });
 
-const useAxiosSecure = () => {
+const useAxios = () => {
     return axiosInstance;
 };
 
-export default useAxiosSecure;
+export default useAxios;
 

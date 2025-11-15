@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 const UpdateMovie = () => {
     const { id } = useParams();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [movie, setMovie] = useState(null);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
-        axiosSecure
+        axiosInstance
             .get(`/movies/${id}`)
             .then(data => {
                 setMovie(data.data)
                 setLoading(false);
             })
             .catch((err) => console.error(err));
-    }, [id, axiosSecure]);
+    }, [id, axiosInstance]);
 
     const handleUpdate = (e) => {
         e.preventDefault();
@@ -41,7 +41,7 @@ const UpdateMovie = () => {
             plotSummary: form.plotSummary.value,
         };
 
-        axiosSecure.patch(`/movies/${movie._id}`, updatedMovie)
+        axiosInstance.patch(`/movies/${movie._id}`, updatedMovie)
             .then(() => {
                 Swal.fire({
                     title: "Updated!",

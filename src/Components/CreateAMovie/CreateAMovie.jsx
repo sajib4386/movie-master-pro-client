@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { MdMovie } from "react-icons/md";
 import Loading from "../Loading/Loading";
 import { useNavigate } from "react-router";
+import useAxios from "../Hooks/useAxios";
 
 
 const CreateAMovie = () => {
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [submitting, setSubmitting] = useState(false);
     const navigate = useNavigate()
 
@@ -33,7 +33,7 @@ const CreateAMovie = () => {
             addedBy: user?.email
         };
 
-        axiosSecure.post("/movies", newMovie)
+        axiosInstance.post("/movies", newMovie)
             .then((data) => {
                 if (data.data.insertedId) {
                     Swal.fire({

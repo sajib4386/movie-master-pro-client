@@ -4,28 +4,28 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import { motion } from "framer-motion";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcClapperboard, FcRating } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineSlowMotionVideo } from "react-icons/md";
 import { FaRegSquarePlus } from "react-icons/fa6";
 import Loading from "../Loading/Loading";
+import useAxios from "../Hooks/useAxios";
 
 const HeroSection = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [movies, setMovies] = useState([]);
     const prevRef = useRef(null);
     const nextRef = useRef(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axiosSecure.get("/movies")
+        axiosInstance.get("/movies")
             .then((data) => {
                 setMovies(data.data)
                 setLoading(false);
             })
             .catch((err) => console.error(err));
-    }, [axiosSecure]);
+    }, [axiosInstance]);
 
     if (loading) return <Loading />;
 

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import logoImg from "../../assets/logo.png"
 import Loading from "../Loading/Loading";
+import useAxios from "../Hooks/useAxios";
 
 const StatisticsSection = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [stats, setStats] = useState([]);
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        axiosSecure.get("/stats")
+        axiosInstance.get("/stats")
             .then(data => {
                 setStats(data.data);
                 setLoading(false);
             })
             .catch(err => console.error(err));
-    }, [axiosSecure]);
+    }, [axiosInstance]);
 
      if (loading) return <Loading />;
 

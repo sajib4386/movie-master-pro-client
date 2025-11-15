@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import useAxiosSecure from '../Hooks/useAxiosSecure';
 import { Link } from 'react-router';
 import { motion } from "motion/react";
 import Loading from '../Loading/Loading';
 import { FcClapperboard, FcRating } from 'react-icons/fc';
 import { SlCalender } from 'react-icons/sl';
+import useAxios from '../Hooks/useAxios';
 
 const AllMovies = () => {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
 
     useEffect(() => {
 
-        axiosSecure.get('/movies')
+        axiosInstance.get('/movies')
             .then(data => {
                 setMovies(data.data);
                 setLoading(false);
             })
             .catch(err => console.error(err));
-    }, [axiosSecure]);
+    }, [axiosInstance]);
 
     if (loading) return <Loading></Loading>;
 

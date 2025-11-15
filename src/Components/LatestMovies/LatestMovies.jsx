@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcRating } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import { MdMovie, MdOutlineSlowMotionVideo } from "react-icons/md";
 import Loading from "../Loading/Loading";
+import useAxios from "../Hooks/useAxios";
 
 const LatestMovies = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [recentMovies, setRecentMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axiosSecure
+        axiosInstance
             .get("/latest-movies")
             .then((data) => {
                 setRecentMovies(data.data)
                 setLoading(false);
             })
             .catch((err) => console.error(err));
-    }, [axiosSecure]);
+    }, [axiosInstance]);
 
     if (loading) return <Loading />;
 

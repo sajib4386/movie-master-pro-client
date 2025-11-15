@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { MdDelete, MdEdit } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
 import Loading from "../Loading/Loading";
+import useAxios from "../Hooks/useAxios";
 
 
 const MyCollection = () => {
     const { user } = useAuth()
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [myMovies, setMyMovies] = useState([]);
     const [loading,setLoading] = useState(true)
 
     useEffect(() => {
-        axiosSecure.get(`/movies?addedBy=${user?.email}`)
+        axiosInstance.get(`/movies?addedBy=${user?.email}`)
             .then(res => {
                 setMyMovies(res.data)
                 setLoading(false)
             })
             .catch((err) => console.error(err));
-    }, [user, axiosSecure]);
+    }, [user, axiosInstance]);
 
     const handleDelete = (_id) => {
         Swal.fire({
@@ -33,7 +33,7 @@ const MyCollection = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/movies/${_id}`)
+                axiosInstance.delete(`/movies/${_id}`)
                     .then((data) => {
                         if (data.data.deletedCount > 0) {
                             Swal.fire({

@@ -1,30 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcRating, FcClapperboard } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import { MdOutlineEdit, MdDelete } from "react-icons/md";
 import Loading from "../Loading/Loading";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 const MovieDetails = () => {
     const { id } = useParams();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const { user: currentUser } = useAuth();
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-        axiosSecure
+        axiosInstance
             .get(`/movies/${id}`)
             .then(data => {
                 setMovie(data.data);
                 setLoading(false);
             })
             .catch(err => console.error(err));
-    }, [axiosSecure, id]);
+    }, [axiosInstance, id]);
 
     const handleDelete = (_id) => {
         Swal.fire({
@@ -37,7 +37,7 @@ const MovieDetails = () => {
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/movies/${_id}`)
+                axiosInstance.delete(`/movies/${_id}`)
                     .then((data) => {
                         if (data.data.deletedCount > 0) {
                             Swal.fire({
@@ -55,7 +55,7 @@ const MovieDetails = () => {
 
     // Watchlist
     const handleAddToWatchlist = (movieId) => {
-        axiosSecure.post('/watchlist', { movieId, email: currentUser?.email })
+        axiosInstance.post('/watchlist', { movieId, email: currentUser?.email })
             .then(data => {
 
                 if (data.data.exists) {

@@ -4,12 +4,12 @@ import { GrUserManager } from "react-icons/gr";
 import { MdEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 const Register = () => {
     const { googleLogin, createUser, setUser, setError, updateUser } = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false)
     const [loadingRegister, setLoadingRegister] = useState(false);
@@ -55,7 +55,7 @@ const Register = () => {
 
             const newUser = { name, email, image: photoURL };
 
-            axiosSecure.post("/users", newUser)
+            axiosInstance.post("/users", newUser)
                 .then(data => {
                     if (data.data.insertedId) {
                         Swal.fire({
@@ -98,8 +98,8 @@ const Register = () => {
                 image: user.photoURL
             };
 
-            // AxiosSecure দিয়ে POST করা
-            axiosSecure.post('/users', newUser)
+            // axiosInstance দিয়ে POST করা
+            axiosInstance.post('/users', newUser)
                 .then(data => {
                     if (data.data.insertedId) {
                         Swal.fire({

@@ -3,13 +3,13 @@ import { FaEye, FaEyeSlash, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Link, useNavigate } from "react-router";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import useAxios from "../Hooks/useAxios";
 
 const Login = () => {
 
     const { signIn, googleLogin, setUser } = useAuth();
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [loadingLogin, setLoadingLogin] = useState(false);
@@ -70,7 +70,7 @@ const Login = () => {
             };
 
 
-            axiosSecure.post('/users', newUser)
+            axiosInstance.post('/users', newUser)
                 .then(data => {
                     if (data.data.insertedId) {
                         Swal.fire({

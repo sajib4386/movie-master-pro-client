@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { FcRating, FcClapperboard } from "react-icons/fc";
 import { SlCalender } from "react-icons/sl";
 import Loading from "../Loading/Loading";
+import useAxios from "../Hooks/useAxios";
 
 const TopRatedMovies = () => {
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
     const [topMovies, setTopMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axiosSecure.get("/top-rated")
+        axiosInstance.get("/top-rated")
             .then(data => {
                 setTopMovies(data.data)
                 setLoading(false);
             })
             .catch(err => console.error(err));
-    }, [axiosSecure]);
+    }, [axiosInstance]);
     if (loading) return <Loading />;
 
     return (

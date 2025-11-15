@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
-import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Loading from "../Loading/Loading";
 import Swal from "sweetalert2";
 import { Link } from "react-router";
 import { MdDelete } from "react-icons/md";
+import useAxios from "../Hooks/useAxios";
 
 const Watchlist = () => {
     const { user } = useAuth();
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-    const axiosSecure = useAxiosSecure();
+    const axiosInstance = useAxios()
 
 
     useEffect(() => {
@@ -22,7 +22,7 @@ const Watchlist = () => {
                 setLoading(true);
                 setError("");
 
-                const res = await axiosSecure.get("/watchlist", {
+                const res = await axiosInstance.get("/watchlist", {
                     params: { email: user.email }
                 });
 
@@ -39,7 +39,7 @@ const Watchlist = () => {
         };
 
         fetchWatchlist();
-    }, [user, axiosSecure]);
+    }, [user, axiosInstance]);
 
     const handleRemove = async (id) => {
         const result = await Swal.fire({
@@ -53,7 +53,7 @@ const Watchlist = () => {
 
         if (result.isConfirmed) {
             try {
-                await axiosSecure.delete(`/watchlist/${id}`, {
+                await axiosInstance.delete(`/watchlist/${id}`, {
                     params: { email: user.email } 
                 });
 
