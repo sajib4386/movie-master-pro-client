@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import useAxios from "../Hooks/useAxios";
 
 const Login = () => {
-
     const { signIn, googleLogin, setUser } = useAuth();
     const axiosInstance = useAxios()
     const navigate = useNavigate();
@@ -21,7 +20,7 @@ const Login = () => {
         const password = e.target.password.value;
 
         if (!email || !password) {
-            await Swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Missing Fields',
                 text: 'Please enter email and password.'
@@ -35,7 +34,7 @@ const Login = () => {
             const user = result.user;
             setUser(user);
 
-            await Swal.fire({
+            Swal.fire({
                 icon: 'success',
                 title: 'Successfully Logged In',
                 showConfirmButton: false,
@@ -44,12 +43,13 @@ const Login = () => {
 
             navigate("/");
         } catch (err) {
-            await Swal.fire({
+            Swal.fire({
                 icon: 'error',
                 title: 'Login Failed',
                 text: err.message
             });
-        } finally {
+        }
+        finally {
             setLoadingLogin(false);
         }
     };
@@ -166,4 +166,3 @@ const Login = () => {
 };
 
 export default Login;
-

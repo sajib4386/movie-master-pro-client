@@ -96,7 +96,6 @@ const Register = () => {
             };
 
             await axiosInstance.post('/users', newUser).catch(err => {
-                // 409 user exists ignore, অন্য কোনো error হলে Swal দেখাবে
                 if (err.response?.status !== 409) {
                     Swal.fire({
                         icon: "error",
