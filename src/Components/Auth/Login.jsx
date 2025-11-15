@@ -15,14 +15,13 @@ const Login = () => {
     const [loadingLogin, setLoadingLogin] = useState(false);
     const [loadingGoogle, setLoadingGoogle] = useState(false);
 
-
     const handleLogin = async (e) => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
 
         if (!email || !password) {
-            Swal.fire({
+            await Swal.fire({
                 icon: 'error',
                 title: 'Missing Fields',
                 text: 'Please enter email and password.'
@@ -36,7 +35,7 @@ const Login = () => {
             const user = result.user;
             setUser(user);
 
-            Swal.fire({
+            await Swal.fire({
                 icon: 'success',
                 title: 'Successfully Logged In',
                 showConfirmButton: false,
@@ -45,19 +44,17 @@ const Login = () => {
 
             navigate("/");
         } catch (err) {
-            Swal.fire({
+            await Swal.fire({
                 icon: 'error',
                 title: 'Login Failed',
                 text: err.message
             });
-        }
-        finally {
+        } finally {
             setLoadingLogin(false);
         }
     };
 
     const handleSignInWithGoogle = async () => {
-
         try {
             setLoadingGoogle(true);
             const result = await googleLogin();
@@ -69,30 +66,34 @@ const Login = () => {
                 image: user.photoURL
             };
 
+            await axiosInstance.post('/users', newUser).catch(err => {
+                if (err.response?.status !== 409) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!"
+                    });
+                }
+            });
 
-            axiosInstance.post('/users', newUser)
-                .then(data => {
-                    if (data.data.insertedId) {
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Successfully logged in with Google",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                    setUser(user);
-                    navigate("/")
-                })
+            setUser(user);
 
+            await Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Successfully logged in with Google",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            navigate("/");
         } catch (error) {
-            Swal.fire({
+            await Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong!",
+                text: "Something went wrong!"
             });
-        }
-        finally {
+        } finally {
             setLoadingGoogle(false);
         }
     };
@@ -165,3 +166,4 @@ const Login = () => {
 };
 
 export default Login;
+

@@ -65,7 +65,6 @@ const Register = () => {
                             timer: 1500
                         });
                     }
-                    e.target.reset();
                     setError("");
                     navigate("/");
                 })
@@ -84,8 +83,6 @@ const Register = () => {
     };
 
 
-
-
     const handleSignInWithGoogle = async () => {
         try {
             setLoadingGoogle(true);
@@ -98,30 +95,35 @@ const Register = () => {
                 image: user.photoURL
             };
 
-            // axiosInstance দিয়ে POST করা
-            axiosInstance.post('/users', newUser)
-                .then(data => {
-                    if (data.data.insertedId) {
-                        Swal.fire({
-                            position: "center",
-                            icon: "success",
-                            title: "Successfully logged in with Google",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                    setUser(user);
-                    navigate("/")
-                })
+            await axiosInstance.post('/users', newUser).catch(err => {
+                // 409 user exists ignore, অন্য কোনো error হলে Swal দেখাবে
+                if (err.response?.status !== 409) {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!"
+                    });
+                }
+            });
 
+            setUser(user);
+
+            await Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Successfully logged in with Google",
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            navigate("/");
         } catch (error) {
-            Swal.fire({
+            await Swal.fire({
                 icon: "error",
                 title: "Oops...",
-                text: "Something went wrong!",
+                text: "Something went wrong!"
             });
-        }
-        finally {
+        } finally {
             setLoadingGoogle(false);
         }
     };
