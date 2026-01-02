@@ -1,5 +1,5 @@
 import React, { use, useEffect, useState } from "react";
-import { FaBars, FaSearch, FaTimes, FaUserCircle } from "react-icons/fa";
+import { FaBars, FaFilm, FaPlusCircle, FaSearch, FaSignOutAlt, FaStar, FaTachometerAlt, FaTimes, FaUserCircle } from "react-icons/fa";
 import { Link, NavLink } from "react-router";
 import logoImg from "../../assets/logo.png"
 import useAuth from "../Hooks/useAuth";
@@ -9,6 +9,8 @@ const NavBar = () => {
     const { user, logout } = useAuth()
     const [open, setOpen] = useState(false);
     const [theme, setTheme] = useState(localStorage.getItem('theme') || "dark")
+    const [profileOpen, setProfileOpen] = useState(false);
+
 
     useEffect(() => {
         const html = document.querySelector('html')
@@ -31,36 +33,127 @@ const NavBar = () => {
             });
     }
 
-    // Auth/Profile Reuse
-    const AuthSection = !user ?
+    // Auth/Profile Section
+    const AuthSection = !user ? (
         <>
-            <Link to="/login" className="px-3 py-1 rounded border border-red-500 hover:bg-red-500 text-sm transition">Login</Link>
-            <Link to="/register" className="px-3 py-1 rounded border border-red-500 hover:bg-red-500 text-sm transition">Register</Link>
+            <Link
+                to="/login"
+                className="px-3 py-1 rounded border border-red-500 hover:bg-red-500 text-sm transition"
+            >
+                Login
+            </Link>
+            <Link
+                to="/register"
+                className="px-3 py-1 rounded border border-red-500 hover:bg-red-500 text-sm transition"
+            >
+                Register
+            </Link>
         </>
-        :
-        <>
-            <button onClick={handleSignOut} className="px-3 py-1 bg-red-500 rounded hover:bg-red-600 text-sm text-white">Logout</button>
-            <div className="relative group">
-                {
-                    user.photoURL ?
-                        <img
-                            src={user?.photoURL}
-                            alt=""
-                            className="w-8 h-8 rounded-full border border-white"
-                        />
-                        :
-                        <FaUserCircle size={24} />
-                }
-                <ul className="absolute hidden group-hover:block bg-gray-800 rounded-md mt-2 w-48 right-0">
-                    <li><a href="#" className="block text-center px-4 py-2 hover:bg-gray-700 text-white">My Profile</a></li>
-                    <li className="bg-gray-700 rounded-md mt-1 text-gray-100 text-center p-5">
-                        <div className="font-semibold text-yellow-300">{user?.displayName}</div>
-                        <div className="text-xs text-gray-300">{user?.email}</div>
+    ) : (
+        <div className="relative">
+            {/* Profile Icon */}
+            <button onClick={() => setProfileOpen(!profileOpen)}>
+                {user.photoURL ? (
+                    <img
+                        src={user.photoURL}
+                        alt=""
+                        className="w-8 h-8 rounded-full border border-white"
+                    />
+                ) : (
+                    <FaUserCircle size={26} />
+                )}
+            </button>
+
+            {/* Dropdown */}
+            {profileOpen && (
+                <ul
+                    className="absolute mt-3 w-60 max-w-[90vw] rounded-xl shadow-2xl border bg-white text-gray-800 border-gray-200 
+                              dark:bg-gray-900 dark:text-white dark:border-gray-700 z-50 overflow-hidden xl:right-0 top-14">
+                    {/* User Info */}
+                    <li className="px-5 py-4 text-center border-b border-gray-200 dark:border-gray-700">
+                        <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                            {user.photoURL ? (
+                                <img
+                                    src={user.photoURL}
+                                    className="w-full h-full rounded-full"
+                                    alt=""
+                                />
+                            ) : (
+                                <FaUserCircle size={28} />
+                            )}
+                        </div>
+
+                        <div className="font-semibold text-yellow-500 dark:text-yellow-400 truncate">
+                            {user.displayName}
+                        </div>
+                        <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
+                            {user.email}
+                        </div>
+                    </li>
+
+                    {/* Dashboard */}
+                    <li>
+                        <NavLink
+                            to="/dashboard"
+                            onClick={() => setProfileOpen(false)}
+                            className="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                        >
+                            <FaTachometerAlt className="text-red-500" />
+                            <span>Dashboard</span>
+                        </NavLink>
+                    </li>
+
+                    {/* Protected Routes */}
+                    <li>
+                        <NavLink
+                            to="/myCollection"
+                            onClick={() => setProfileOpen(false)}
+                            className="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                        >
+                            <FaFilm />
+                            <span>My Collection</span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink
+                            to="/add-movie"
+                            onClick={() => setProfileOpen(false)}
+                            className="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                        >
+                            <FaPlusCircle />
+                            <span>Add Movie</span>
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink
+                            to="/watchlist"
+                            onClick={() => setProfileOpen(false)}
+                            className="flex items-center gap-3 px-5 py-3 text-yellow-600 dark:text-yellow-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                        >
+                            <FaStar />
+                            <span>Watchlist</span>
+                        </NavLink>
+                    </li>
+
+
+                    {/* Logout */}
+                    <li className="border-t border-gray-200 dark:border-gray-700">
+                        <button
+                            onClick={handleSignOut}
+                            className="w-full flex items-center gap-3 px-5 py-3 text-red-500 hover:bg-red-100 dark:hover:bg-red-500/20 transition"
+                        >
+                            <FaSignOutAlt />
+                            Logout
+                        </button>
                     </li>
                 </ul>
-            </div>
-        </>
-        ;
+            )}
+        </div>
+    );
+
+
 
     return (
         <header className="dark:bg-gray-900 dark:text-white sticky top-0 z-50 p-2">
@@ -80,15 +173,7 @@ const NavBar = () => {
                         <nav className="flex items-center gap-6">
                             <NavLink to="/" className="hover:text-red-500 transition">Home</NavLink>
                             <NavLink to="/movies" className="hover:text-red-500 transition">All Movies</NavLink>
-
-
-                            {user &&
-                                <>
-                                    <NavLink to="/myCollection" className="hover:text-red-500 transition">My Collection</NavLink>
-                                    <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
-                                    <NavLink to="/watchlist" className="hover:text-yellow-400 transition">Watchlist</NavLink>
-                                </>
-                            }
+                            <NavLink to="/about" className="hover:text-red-500 transition">About</NavLink>
                         </nav>
 
                         {/* Search Bar */}
@@ -123,20 +208,13 @@ const NavBar = () => {
 
             {/* Mobile Sidebar */}
             {open && (
-                <div className="xl:hidden dark:bg-gray-900 dark:text-white px-6 py-4 space-y-4">
+                <div className="xl:hidden dark:bg-gray-900 dark:text-white px-6 py-4 space-y-2">
                     <NavLink to="/" className="block hover:text-red-500 transition">Home</NavLink>
                     <NavLink to="/movies" className="block hover:text-red-500 transition">All Movies</NavLink>
-
-                    {user &&
-                        <div className="flex flex-col space-y-4">
-                            <NavLink to="/myCollection" className="hover:text-red-500 transition">My Collection</NavLink>
-                            <NavLink to="/add-movie" className="hover:text-red-500 transition">Add Movie</NavLink>
-                            <NavLink to="/watchlist" className="hover:text-yellow-400 transition">Watchlist</NavLink>
-                        </div>
-                    }
+                    <NavLink to="/about" className="hover:text-red-500 transition">About</NavLink>
 
                     {/* Mobile Search Bar */}
-                    <div className="relative">
+                    <div className="relative mt-2">
                         <input
                             type="text"
                             placeholder="Search movies..."
