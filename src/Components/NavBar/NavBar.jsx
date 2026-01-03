@@ -55,7 +55,7 @@ const NavBar = () => {
             <button onClick={() => setProfileOpen(!profileOpen)}>
                 {user.photoURL ? (
                     <img
-                        src={user.photoURL}
+                        src={user?.photoURL}
                         alt=""
                         className="w-8 h-8 rounded-full border border-white"
                     />
@@ -74,7 +74,7 @@ const NavBar = () => {
                         <div className="w-12 h-12 mx-auto mb-2 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                             {user.photoURL ? (
                                 <img
-                                    src={user.photoURL}
+                                    src={user?.photoURL}
                                     className="w-full h-full rounded-full"
                                     alt=""
                                 />
@@ -84,10 +84,10 @@ const NavBar = () => {
                         </div>
 
                         <div className="font-semibold text-yellow-500 dark:text-yellow-400 truncate">
-                            {user.displayName}
+                            {user?.displayName}
                         </div>
                         <div className="text-xs text-gray-500 dark:text-gray-400 truncate">
-                            {user.email}
+                            {user?.email}
                         </div>
                     </li>
 
