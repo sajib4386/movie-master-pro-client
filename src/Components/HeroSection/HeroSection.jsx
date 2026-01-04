@@ -22,7 +22,7 @@ const HeroSection = () => {
     useEffect(() => {
         axiosInstance.get("/movies")
             .then((data) => {
-                setMovies(data.data)
+                setMovies(data.data.result)
                 setLoading(false);
             })
             .catch((err) => console.error(err));
