@@ -103,41 +103,6 @@ const NavBar = () => {
                         </NavLink>
                     </li>
 
-                    {/* Protected Routes */}
-                    <li>
-                        <NavLink
-                            to="/myCollection"
-                            onClick={() => setProfileOpen(false)}
-                            className="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-                        >
-                            <FaFilm />
-                            <span>My Collection</span>
-                        </NavLink>
-                    </li>
-
-                    <li>
-                        <NavLink
-                            to="/add-movie"
-                            onClick={() => setProfileOpen(false)}
-                            className="flex items-center gap-3 px-5 py-3 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-                        >
-                            <FaPlusCircle />
-                            <span>Add Movie</span>
-                        </NavLink>
-                    </li>
-
-                    <li>
-                        <NavLink
-                            to="/watchlist"
-                            onClick={() => setProfileOpen(false)}
-                            className="flex items-center gap-3 px-5 py-3 text-yellow-600 dark:text-yellow-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
-                        >
-                            <FaStar />
-                            <span>Watchlist</span>
-                        </NavLink>
-                    </li>
-
-
                     {/* Logout */}
                     <li className="border-t border-gray-200 dark:border-gray-700">
                         <button
@@ -171,9 +136,9 @@ const NavBar = () => {
                 <div className="hidden xl:flex flex-1 items-center justify-between gap-6">
                     <div className="flex items-center justify-center flex-1 gap-8">
                         <nav className="flex items-center gap-6">
-                            <NavLink to="/" className="hover:text-red-500 transition">Home</NavLink>
-                            <NavLink to="/movies" className="hover:text-red-500 transition">All Movies</NavLink>
-                            <NavLink to="/about" className="hover:text-red-500 transition">About</NavLink>
+                            <NavLink to="/" className="hover:text-red-500 transition nav-item">Home</NavLink>
+                            <NavLink to="/movies" className="hover:text-red-500 transition nav-item">All Movies</NavLink>
+                            <NavLink to="/about" className="hover:text-red-500 transition nav-item">About</NavLink>
                         </nav>
 
                         {/* Search Bar */}

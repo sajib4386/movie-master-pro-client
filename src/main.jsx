@@ -18,6 +18,8 @@ import NotFound from './Components/NotFound/NotFound.jsx';
 import Watchlist from './Components/Watchlist/Watchlist.jsx';
 import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary.jsx';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
+import DashBoardHome from './Components/DashBoard/DashBoardHome/DashBoardHome.jsx';
+import DashBoardLayout from './Components/DashBoard/LayOut/DashBoardLayout.jsx';
 
 
 const router = createBrowserRouter([
@@ -47,27 +49,39 @@ const router = createBrowserRouter([
         Component: MovieDetails
       },
       {
-        path: "/myCollection",
-        element: <PrivateRoute><MyCollection></MyCollection></PrivateRoute>
-      },
-      {
         path: "/update-movie/:id",
         element: <PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>
-      },
-      {
-        path: "/add-movie",
-        element: <PrivateRoute><CreateAMovie></CreateAMovie></PrivateRoute>
       },
       {
         path: "*",
         Component: NotFound
       },
+    ]
+  },
+
+  // Dashboard
+  {
+    path: "/dashboard",
+    element: <PrivateRoute><DashBoardLayout></DashBoardLayout></PrivateRoute>,
+    children: [
       {
-        path: "/watchlist",
+        index: true,
+        Component: DashBoardHome
+      },
+      {
+        path: "/dashboard/my-collection",
+        Component: MyCollection
+      },
+      {
+        path: "/dashboard/add-movie",
+        Component: CreateAMovie
+      },
+      {
+        path: "/dashboard/watchlist",
         Component: Watchlist
       }
     ]
-  },
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(

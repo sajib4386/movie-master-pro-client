@@ -11,12 +11,12 @@ const MyCollection = () => {
     const { user } = useAuth()
     const axiosInstance = useAxios()
     const [myMovies, setMyMovies] = useState([]);
-    const [loading,setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         axiosInstance.get(`/movies?addedBy=${user?.email}`)
             .then(res => {
-                setMyMovies(res.data)
+                setMyMovies(res.data.result)
                 setLoading(false)
             })
             .catch((err) => console.error(err));
@@ -53,7 +53,7 @@ const MyCollection = () => {
 
 
     return (
-        <div className="dark:bg-[#030303] min-h-screen py-10 px-5 text-gray-100">
+        <div className="min-h-screen py-10 px-5 bg-slate-100 text-slate-900 dark:bg-[#030303] dark:text-gray-100">
             <h2 className="text-3xl font-bold mb-8 text-center text-black dark:text-white">
                 My Movie Collection: <span className="text-yellow-400">{myMovies.length}</span>
             </h2>
@@ -62,13 +62,13 @@ const MyCollection = () => {
                 {myMovies.map((movie) => (
                     <div
                         key={movie._id}
-                        className="grid grid-cols-[120px_1fr] gap-6 bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow border-2 border-amber-300 dark:border-amber-100"
+                        className="grid grid-cols-[120px_1fr] gap-6 bg-gray-200 dark:bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-xl transition-shadow border-2 border-amber-300 dark:border-amber-100"
                     >
                         {/* Left: Poster */}
                         <img
                             src={movie?.posterUrl}
                             alt=""
-                            className="w-full h-full rounded-md border border-gray-700"
+                            className="w-full h-full rounded-md border border-gray-300 dark:border-gray-700"
                         />
 
                         {/* Right: Info + Buttons */}
@@ -76,34 +76,35 @@ const MyCollection = () => {
                             {/* Info Section */}
                             <div>
                                 {/* Title */}
-                                <h3 className="text-xl font-bold text-white mb-2">
+                                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                                     {movie?.title}
                                 </h3>
 
                                 {/* Details */}
-                                <p className="text-gray-300 text-sm mb-1">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm mb-1">
                                     <span className="font-medium">Genre:</span> {movie?.genre}
                                 </p>
-                                <p className="text-gray-300 text-sm mb-1">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm mb-1">
                                     <span className="font-medium">Year:</span> {movie?.releaseYear}
                                 </p>
-                                <p className="text-gray-300 text-sm mb-1">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm mb-1">
                                     <span className="font-medium">Rating:</span> {movie?.rating}
                                 </p>
-                                <p className="text-gray-300 text-sm mb-1">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm mb-1">
                                     <span className="font-medium">Duration:</span> {movie?.duration} min
                                 </p>
-                                <p className="text-gray-300 text-sm mb-1">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm mb-1">
                                     <span className="font-medium">Language:</span> {movie?.language}
                                 </p>
-                                <p className="text-gray-300 text-sm">
+                                <p className="text-gray-700 dark:text-gray-300 text-sm">
                                     <span className="font-medium">Country:</span> {movie?.country}
                                 </p>
                             </div>
 
                             {/* Buttons */}
                             <div className="flex gap-2 mt-3">
-                                <Link to={`/update-movie/${movie._id}`} className="flex items-center gap-1 px-3 py-1 bg-yellow-500 text-gray-900 rounded hover:bg-yellow-600 text-sm">
+                                <Link to={`/update-movie/${movie._id}`}
+                                    className="flex items-center gap-1 px-3 py-1 bg-yellow-500 text-gray-900 dark:text-gray-900 rounded hover:bg-yellow-600 text-sm">
                                     <MdEdit /> Edit
                                 </Link>
 

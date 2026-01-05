@@ -4,3 +4,48 @@
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+
+.nav-item {
+  display: flex;         
+  align-items: center;      
+  gap: 10px;              
+  border-radius: 16px;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+
+/* Dark Mode */
+html[data-theme="dark"] .nav-item {
+  background-color: #020617;
+  color: #e5e7eb;
+}
+
+html[data-theme="dark"] .nav-item:hover {
+  background-color: #1e293b;
+}
+
+/* Dark Mode Active */
+html[data-theme="dark"] .nav-item.active {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+
+/* Light Mode */
+html[data-theme="light"] .nav-item {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+html[data-theme="light"] .nav-item:hover {
+  background-color: #e2e8f0;
+}
+
+/* Light Mode Active */
+html[data-theme="light"] .nav-item.active {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
