@@ -48,7 +48,7 @@ const Profile = () => {
             className="w-28 h-28 rounded-full border-4 border-red-500 mb-3"
           />
           <h3 className="text-xl font-semibold">{user?.displayName}</h3>
-          <p className="text-sm text-gray-100">{user?.email}</p>
+          <p className="text-sm text-black dark:text-gray-100">{user?.email}</p>
         </div>
 
         {/* Editable Form */}

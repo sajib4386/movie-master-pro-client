@@ -20,7 +20,7 @@ const TestiMonials = () => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 items-end">
 
                     {/* Card 1 */}
-                    <div className="relative bg-white dark:bg-white/10 rounded-2xl border-2 border-amber-500 shadow-md overflow-visible">
+                    <div className="relative bg-white dark:bg-white/10 rounded-2xl border-2 border-amber-500 shadow-md overflow-visible m-5">
 
 
                         <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-gray-200 rounded-full z-10">
@@ -50,7 +50,7 @@ const TestiMonials = () => {
                     </div>
 
                     {/* Card 2 */}
-                    <div className="relative bg-white dark:bg-white/10 rounded-2xl border-2 border-amber-500 shadow-2xl overflow-visible scale-105">
+                    <div className="relative bg-white dark:bg-white/10 rounded-2xl border-2 border-amber-500 shadow-2xl overflow-visible scale-105 m-5">
 
                         <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-gray-200 rounded-full z-10">
                             <img
@@ -72,7 +72,7 @@ const TestiMonials = () => {
                     </div>
 
                     {/* Card 3 */}
-                    <div className="relative bg-white dark:bg-white/10 rounded-2xl border-2 border-amber-500 shadow-md overflow-visible">
+                    <div className="relative bg-white dark:bg-white/10 rounded-2xl border-2 border-amber-500 shadow-md overflow-visible m-5">
                         <div className="absolute -top-16 left-1/2 transform -translate-x-1/2 bg-gray-200 rounded-full z-10">
                             <img
                                 src={img3}
