@@ -22,6 +22,7 @@ import DashBoardHome from './Components/DashBoard/DashBoardHome/DashBoardHome.js
 import DashBoardLayout from './Components/DashBoard/LayOut/DashBoardLayout.jsx';
 import Profile from './Components/DashBoard/Profile/Profile.jsx';
 import AboutPlatform from './Components/AboutPlatform/AboutPlatform.jsx';
+import Contact from './Components/Contact/Contact.jsx';
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         Component: AboutPlatform
+      },
+      {
+        path: "/contact",
+        Component: Contact
       }
     ]
   },

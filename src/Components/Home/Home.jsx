@@ -7,6 +7,9 @@ import Features from '../Features/Features'
 import Services from '../Services/Services'
 import Categories from '../Categories/Categories'
 import TestiMonials from '../TestiMonials/TestiMonials'
+import Newsletter from '../NewsLetter/NewsLetter'
+import FAQ from '../FAQ/FAQ'
+import CTA from '../CTA/CTA'
 
 
 const Home = () => {
@@ -18,8 +21,11 @@ const Home = () => {
       <LatestMovies></LatestMovies>
       <StatisticsSection></StatisticsSection>
       <Features></Features>
+      <FAQ></FAQ>
       <Services></Services>
       <TestiMonials></TestiMonials>
+      <CTA></CTA>
+      <Newsletter></Newsletter>
     </div>
   )
 }
