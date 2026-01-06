@@ -13,11 +13,15 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [loadingLogin, setLoadingLogin] = useState(false);
     const [loadingGoogle, setLoadingGoogle] = useState(false);
+    const [demoEmail, setDemoEmail] = useState("");
+    const [demoPassword, setDemoPassword] = useState("");
+
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+
+        const email = demoEmail || e.target.email.value;
+        const password = demoPassword || e.target.password.value;
 
         if (!email || !password) {
             Swal.fire({
@@ -31,8 +35,7 @@ const Login = () => {
         try {
             setLoadingLogin(true);
             const result = await signIn(email, password);
-            const user = result.user;
-            setUser(user);
+            setUser(result.user);
 
             Swal.fire({
                 icon: 'success',
@@ -48,11 +51,13 @@ const Login = () => {
                 title: 'Login Failed',
                 text: err.message
             });
-        }
-        finally {
+        } finally {
             setLoadingLogin(false);
+            setDemoEmail("");
+            setDemoPassword("");
         }
     };
+
 
     const handleSignInWithGoogle = async () => {
         try {
@@ -118,6 +123,8 @@ const Login = () => {
                             <input
                                 type="email"
                                 name="email"
+                                value={demoEmail}
+                                onChange={(e) => setDemoEmail(e.target.value)}
                                 className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
                                 placeholder="Your Email"
                             />
@@ -129,6 +136,8 @@ const Login = () => {
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
+                                value={demoPassword}
+                                onChange={(e) => setDemoPassword(e.target.value)}
                                 className="grow bg-transparent text-white placeholder-gray-400 focus:outline-none"
                                 placeholder="Your Password"
                             />
@@ -146,6 +155,19 @@ const Login = () => {
                                 {loadingLogin ? <span className="loading loading-spinner loading-xs"></span> : 'LOGIN'}
                             </button>
                         </div>
+
+                        {/* Demo User Login */}
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setDemoEmail("demouser43@gmail.com");
+                                setDemoPassword("Demo43@");
+                            }}
+                            className="btn w-full mt-3 bg-indigo-500 hover:bg-indigo-600 text-white text-sm"
+                        >
+                            Login as Demo User
+                        </button>
+
 
                     </form>
                     {/* Google */}
