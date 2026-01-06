@@ -5,6 +5,7 @@ import TopRatedMovies from '../TopRatedMovies/TopRatedMovies'
 import LatestMovies from '../LatestMovies/LatestMovies'
 import GenreSection from '../GenreSection/GenreSection'
 import AboutPlatform from '../AboutPlatform/AboutPlatform'
+import Features from '../Features/Features'
 
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       <TopRatedMovies></TopRatedMovies>
       <LatestMovies></LatestMovies>
       <StatisticsSection></StatisticsSection>
+      <Features></Features>
       <AboutPlatform></AboutPlatform>
     </div>
   )
