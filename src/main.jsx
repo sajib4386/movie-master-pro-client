@@ -20,6 +20,7 @@ import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary.jsx';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
 import DashBoardHome from './Components/DashBoard/DashBoardHome/DashBoardHome.jsx';
 import DashBoardLayout from './Components/DashBoard/LayOut/DashBoardLayout.jsx';
+import Profile from './Components/DashBoard/Profile/Profile.jsx';
 
 
 const router = createBrowserRouter([
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/watchlist",
         Component: Watchlist
+      },
+      {
+        path: "/dashboard/profile",
+        Component: Profile
       }
     ]
   }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
 import logoImg from "../../../assets/logo.png"
 import { MdInventory } from 'react-icons/md'
-import { FaFilm, FaPlusCircle, FaSignOutAlt, FaStar } from 'react-icons/fa'
+import { FaFilm, FaPlusCircle, FaSignOutAlt, FaStar, FaUserCircle } from 'react-icons/fa'
 import useAuth from '../../Hooks/useAuth'
 
 
@@ -57,8 +57,20 @@ const DashBoardLayout = () => {
 
                                 <ul
                                     tabIndex={0}
-                                    className="dropdown-content mt-16 bg-white dark:bg-black border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black">
+                                    className="dropdown-content space-y-3 mt-16 bg-white dark:bg-black border-2 border-amber-200 p-2 rounded-box w-52 font-bold text-black">
                                     {/* Dropdown */}
+
+                                    <li>
+                                        <NavLink
+                                            to="/dashboard/profile"
+                                            className="is-drawer-close:tooltip is-drawer-close:tooltip-right nav-item"
+                                            data-tip="Profile"
+                                        >
+                                            <FaUserCircle />
+                                            <span className="is-drawer-close:hidden">Profile</span>
+                                        </NavLink>
+                                    </li>
+
                                     <li>
                                         <NavLink to="/dashboard" end className="px-5 py-3 text-red-500 hover:bg-red-100 dark:hover:bg-red-500/20 transition nav-item">Dashboard Home</NavLink>
                                     </li>
@@ -66,7 +78,7 @@ const DashBoardLayout = () => {
                                     <li>
                                         <button
                                             onClick={handleSignOut}
-                                            className="w-full flex items-center gap-3 px-5  mt-2 py-3 rounded-2xl dark:text-white text-red-500 hover:bg-red-600 dark:hover:bg-red-500/20 transition"
+                                            className="w-full flex items-center gap-3 px-5 py-3 rounded-2xl bg-gray-200 dark:bg-gray-900 dark:text-white text-red-500 hover:bg-red-600 dark:hover:bg-red-500/20 transition"
                                         >
                                             <FaSignOutAlt />
                                             Logout
