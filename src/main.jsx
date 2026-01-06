@@ -21,6 +21,7 @@ import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
 import DashBoardHome from './Components/DashBoard/DashBoardHome/DashBoardHome.jsx';
 import DashBoardLayout from './Components/DashBoard/LayOut/DashBoardLayout.jsx';
 import Profile from './Components/DashBoard/Profile/Profile.jsx';
+import AboutPlatform from './Components/AboutPlatform/AboutPlatform.jsx';
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
         path: "*",
         Component: NotFound
       },
+      {
+        path: "/about",
+        Component: AboutPlatform
+      }
     ]
   },
 

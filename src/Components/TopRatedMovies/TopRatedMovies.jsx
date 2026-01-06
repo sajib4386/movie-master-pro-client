@@ -20,17 +20,18 @@ const TopRatedMovies = () => {
     if (loading) return <Loading />;
 
     return (
-        <section className="dark:bg-[#0b021f] text-white py-20">
+        <section className="bg-gray-50 dark:bg-[#0b021f] text-gray-800 dark:text-white py-20">
             <div className="mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-extrabold text-start ml-24 lg:ml-10 mb-12 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
+                <h2 className="text-3xl md:text-4xl font-extrabold text-start ml-24 lg:ml-10 mb-12 
+                       bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                     <span className="border-l-8 border-purple-600 rounded-md mr-2"></span>Top Rated Movies
                 </h2>
 
-                <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 m-20 lg:m-4 gap-8 ">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 m-20 lg:m-4 gap-8">
                     {topMovies.map(movie => (
                         <div
                             key={movie._id}
-                            className="bg-[#0b021f] backdrop-blur-lg rounded-3xl p-6 border dark:border-white/10 border-amber-400 shadow-md shadow-amber-300 dark:hover:bg-white/20 transition"
+                            className="bg-white dark:bg-[#0b021f] backdrop-blur-lg rounded-3xl p-6 border border-amber-400 dark:border-white/10 shadow-md shadow-amber-300 dark:hover:bg-white/20 transition"
                         >
                             <img
                                 src={movie?.posterUrl}
@@ -40,17 +41,18 @@ const TopRatedMovies = () => {
                             <h3 className="text-2xl font-bold mb-2 bg-clip-text text-transparent bg-linear-to-r from-indigo-400 to-pink-500">
                                 {movie?.title}
                             </h3>
-                            <div className="flex justify-center items-center gap-3 text-gray-300 text-sm mb-2">
+                            <div className="flex justify-center items-center gap-3 text-gray-600 dark:text-gray-300 text-sm mb-2">
                                 <span className="flex items-center gap-1"><FcRating /> {movie?.rating}</span>
                                 <span className="flex items-center gap-1"><FcClapperboard /> {movie?.genre}</span>
                                 <span className="flex items-center gap-1"><SlCalender /> {movie?.releaseYear}</span>
                             </div>
-                            <p className="text-gray-200 text-sm line-clamp-3">{movie?.plotSummary}</p>
+                            <p className="text-gray-700 dark:text-gray-200 text-sm line-clamp-3">{movie?.plotSummary}</p>
                         </div>
                     ))}
                 </div>
             </div>
         </section>
+
     );
 };
 

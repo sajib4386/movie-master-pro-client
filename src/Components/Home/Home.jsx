@@ -3,21 +3,21 @@ import HeroSection from '../HeroSection/HeroSection'
 import StatisticsSection from '../StatisticsSection/StatisticsSection'
 import TopRatedMovies from '../TopRatedMovies/TopRatedMovies'
 import LatestMovies from '../LatestMovies/LatestMovies'
-import GenreSection from '../GenreSection/GenreSection'
-import AboutPlatform from '../AboutPlatform/AboutPlatform'
 import Features from '../Features/Features'
+import Services from '../Services/Services'
+import Categories from '../Categories/Categories'
 
 
 const Home = () => {
   return (
     <div>
       <HeroSection></HeroSection>
-      <GenreSection></GenreSection>
+      <Categories></Categories>
       <TopRatedMovies></TopRatedMovies>
       <LatestMovies></LatestMovies>
       <StatisticsSection></StatisticsSection>
       <Features></Features>
-      <AboutPlatform></AboutPlatform>
+      <Services></Services>
     </div>
   )
 }
