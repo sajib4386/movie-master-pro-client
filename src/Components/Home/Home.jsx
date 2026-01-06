@@ -6,6 +6,7 @@ import LatestMovies from '../LatestMovies/LatestMovies'
 import Features from '../Features/Features'
 import Services from '../Services/Services'
 import Categories from '../Categories/Categories'
+import TestiMonials from '../TestiMonials/TestiMonials'
 
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
       <StatisticsSection></StatisticsSection>
       <Features></Features>
       <Services></Services>
+      <TestiMonials></TestiMonials>
     </div>
   )
 }
